@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -95,21 +96,32 @@ fun ExchangeRateScreen(
                         tint = MaterialTheme.colorScheme.onBackground
                     )
                 }
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize(Alignment.TopEnd)
                 ) {
-                    Currency.entries.forEach { currency ->
-                        DropdownMenuItem(
-                            text = { Text(currency.code.uppercase()) },
-                            onClick = {
-                                expanded = false
-                                selectedCurrency.value = currency
-                                viewModel.handleIntent(ExchangeRateIntent.ChangeCurrency(currency))
-                            }
-                        )
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        Currency.entries.forEach { currency ->
+                            DropdownMenuItem(
+                                text = { Text(currency.code.uppercase()) },
+                                onClick = {
+                                    expanded = false
+                                    selectedCurrency.value = currency
+                                    viewModel.handleIntent(
+                                        ExchangeRateIntent.ChangeCurrency(
+                                            currency
+                                        )
+                                    )
+                                }
+                            )
+                        }
                     }
                 }
+
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
