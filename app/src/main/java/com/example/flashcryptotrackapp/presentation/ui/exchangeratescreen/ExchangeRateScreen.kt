@@ -125,7 +125,7 @@ fun ExchangeRateScreen(
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    text = "BTC/EUR",
+                    text = "BTC/${selectedCurrency.value.code.uppercase()}",
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.padding(bottom = 8.dp)
