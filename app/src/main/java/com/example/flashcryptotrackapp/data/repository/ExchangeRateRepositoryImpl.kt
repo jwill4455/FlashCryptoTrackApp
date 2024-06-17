@@ -22,6 +22,7 @@ class ExchangeRateRepositoryImpl @Inject constructor(
             ExchangeRate(date = convertTimestampToDate(price[0]), rate = price[1])
         }
         exchangeRateDao.insertAllRates(rates)
+        exchangeRateDao.deleteOldRates()
         return rates
     }
 

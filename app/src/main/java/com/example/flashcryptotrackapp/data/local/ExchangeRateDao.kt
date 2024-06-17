@@ -14,4 +14,7 @@ interface ExchangeRateDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllRates(rates: List<ExchangeRate>)
+
+    @Query("DELETE FROM exchange_rates WHERE date NOT IN (SELECT date FROM exchange_rates ORDER BY date DESC LIMIT 14)")
+    suspend fun deleteOldRates()
 }

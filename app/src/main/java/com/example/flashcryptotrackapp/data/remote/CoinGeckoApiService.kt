@@ -16,6 +16,5 @@ interface CoinGeckoApiService {
     suspend fun getCurrentExchangeRate(
         @Query("ids") id: String = "bitcoin",
         @Query("vs_currencies") currency: String,
-
     ): CurrentExchangeRateResponse
 }
